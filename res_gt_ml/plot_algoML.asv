@@ -1,0 +1,45 @@
+m = [2,5,10];
+
+close all
+for i=1:3
+    for k=1:1
+        load('final_n_test_ex_analog_5.mat')
+        load('RandiUniform_Updatep_n_test_ex_5_rng2.mat')
+        load('RandiUniform_Updatep_n_test_fn_gt_5_rng2.mat')
+        load('RandiUniform_Updatep_n_test_Hwang_5_rng2.mat')
+        
+       
+        fig3 = figure;
+        plot(8:64, n_test_Hwang(i, :, 1),  '--', 'LineWidth', 2, 'Markersize', 8, 'MarkerIndices', 1:4:57);
+        hold on;
+        plot(8:64, n_test_fn_gt(i, :, k),'-+', 'LineWidth', 2,  'Markersize', 8, 'MarkerIndices', 1:4:57);
+        hold on;
+        plot(8:64, n_test_ex(1, :, k), '-o', 'LineWidth', 2, 'Markersize', 8, 'MarkerIndices', 1:4:57);
+        hold on;
+        
+        legend('GBS','PGBS (Parallel, $C=2$)','Parallel Individual Testing', 'Location','northwest','Interpreter','latex','FontSize', 18')
+%         title("The algorithm comparison for m = " + m + " p_{md}= " + pmd(k)+ " p_{fa}= "+ pfa(k))
+%         xlabel('n')
+        xlabel('$N$ (Total number of items)','Interpreter','latex','FontSize', 18)
+        ylabel('$\tau$ (number of cycles)','Interpreter','latex','FontSize', 18)
+        grid on
+        grid minor
+        axis tight;
+        set(gca, 'fontsize',18)
+        saveas(fig3,sprintf("parallelcomp",m(i),pmd(k)),'epsc');
+        
+        
+        figure;
+        plot(8:64, n_test_Hwang(i, :, k),  '--', 'LineWidth', 2, 'Markersize', 8, 'MarkerIndices', 1:4:57);
+        hold on;
+        plot(8:35, num_ex_analog(i,:, k), '-+', 'LineWidth', 2, 'Markersize', 8, 'MarkerIndices', 1:4:57);
+        legend('GBS','MLBS', 'Location','northwest','Interpreter','latex','FontSize', 18')
+        xlabel('$N$ (Number of Angular Regions)','Interpreter','latex','FontSize', 18)
+        ylabel('$t$ (BA duration)','Interpreter','latex','FontSize', 18)
+        grid on
+        grid minor
+        axis tight;
+        set(gca, 'fontsize',18)
+        
+    end
+end

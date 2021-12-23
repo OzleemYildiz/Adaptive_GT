@@ -29,7 +29,7 @@ for tr = 1:trial
 %                 location = zeros(1, n(i));
 %                 location(true_loc) =1;
    
-                [beam_loc, n_steps, ~] = hwang_parallel_generalized(n(i), m(j),1:n(i),{}, location, 0,  P(k));
+                [beam_loc, n_steps] = hwang_parallel_generalized(n(i), m(j),1:n(i),{}, location, 0,  P(k));
                 n_test_Hwang_general_parallel(j,i,k) = n_test_Hwang_general_parallel(j,i,k) + n_steps;
 
                 
